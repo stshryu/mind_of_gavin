@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal player_moving_signal
+signal player_stopped_signal
+
 @export var walk_speed: float = 4.0
 const TILE_SIZE: int = 16
 
@@ -86,11 +89,14 @@ func move(delta: float) -> void:
 	ray.force_raycast_update()
 
 	if !ray.is_colliding():
+		if percent_moved == 0:
+			player_moving_signal.emit("player_moving_signal")
 		percent_moved += walk_speed * delta
 		if percent_moved >= 1.0:
 			position = init_pos + (TILE_SIZE * input_dir)
 			percent_moved = 0.0
 			is_moving = false
+			player_stopped_signal.emit("player_stopped_signal")
 		else:
 			position = init_pos + (TILE_SIZE * input_dir * percent_moved)
 	else:
