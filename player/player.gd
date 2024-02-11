@@ -11,6 +11,7 @@ const dust_effect = preload("res://scenes/landing_dust_effect.tscn")
 @onready var anim_tree = $anim_tree
 @onready var anim_state = anim_tree.get("parameters/playback")
 @onready var ray = $RayCast2D
+@onready var player_sprite = $Sprite
 
 enum PlayerState { IDLE, TURNING, MOVING }
 enum FacingDirection { LEFT, RIGHT, UP, DOWN }
@@ -90,6 +91,7 @@ func jump(delta: float) -> void:
 	percent_moved += jump_speed * delta
 
 	if percent_moved >= 1.99:
+		player_sprite.set_offset(Vector2(0,0))
 		small_shadow.visible = false
 		large_shadow.visible = false
 		var landing_dust_effect = dust_effect.instantiate()
@@ -103,6 +105,10 @@ func jump(delta: float) -> void:
 	else:
 		small_shadow.visible = true if percent_moved <= 1.0 else false
 		large_shadow.visible = true if percent_moved > 1.0 else false
+		if percent_moved <= 1.0:
+			player_sprite.set_offset(Vector2(0,-3))
+		elif percent_moved > 1.0:
+			player_sprite.set_offset(Vector2(0, -1))
 		position = init_pos + (TILE_SIZE * input_dir * percent_moved)
 	
 func move(delta: float) -> void:
