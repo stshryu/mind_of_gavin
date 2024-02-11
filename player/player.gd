@@ -1,8 +1,13 @@
 extends CharacterBody2D
 
 @export var walk_speed: float = 4.0
-const TILE_SIZE: int = 16
+@export var jump_speed: float = 8.0 
 
+const TILE_SIZE: int = 16
+const dust_effect = preload("res://scenes/landing_dust_effect.tscn")
+
+@onready var small_shadow = $SmallShadow
+@onready var large_shadow = $LargeShadow
 @onready var anim_tree = $anim_tree
 @onready var anim_state = anim_tree.get("parameters/playback")
 @onready var ray = $RayCast2D
@@ -18,6 +23,7 @@ var prev_player_state = PlayerState.IDLE
 var init_pos: Vector2 = Vector2.ZERO
 var input_dir: Vector2 = Vector2.ZERO
 var is_moving: bool = false
+var is_jumping: bool = false
 var percent_moved: float = 0.0
 # Each key is added to a stack and removed as keys are depressed (for emulating GBA movements) 
 var direction_keys: Array = [] 
@@ -80,11 +86,30 @@ func need_to_turn() -> bool:
 func finished_turning() -> void:
 	player_state = PlayerState.IDLE
 
+func jump(delta: float) -> void:
+	percent_moved += jump_speed * delta
+
+	if percent_moved >= 1.99:
+		small_shadow.visible = false
+		large_shadow.visible = false
+		var landing_dust_effect = dust_effect.instantiate()
+		landing_dust_effect.position = position
+		get_tree().current_scene.add_child(landing_dust_effect)
+		
+		position = init_pos + (TILE_SIZE * input_dir) * 2
+		percent_moved = 0.0
+		is_jumping = false
+		input_dir = Vector2.ZERO
+	else:
+		small_shadow.visible = true if percent_moved <= 1.0 else false
+		large_shadow.visible = true if percent_moved > 1.0 else false
+		position = init_pos + (TILE_SIZE * input_dir * percent_moved)
+	
 func move(delta: float) -> void:
 	var next_step = input_dir * TILE_SIZE / 2
 	ray.target_position = next_step
 	ray.force_raycast_update()
-	
+
 	if !ray.is_colliding():
 		percent_moved += walk_speed * delta
 		if percent_moved >= 0.99:
@@ -94,11 +119,23 @@ func move(delta: float) -> void:
 		else:
 			position = init_pos + (TILE_SIZE * input_dir * percent_moved)
 	else:
+		var target = ray.get_collider()
+		if target.name.contains("Ledge"):
+			if is_jumpable(target, input_dir):
+				is_jumping = true
 		is_moving = false
 
 func _ready() -> void:
 	anim_tree.active = true
 	init_pos = position
+	
+	small_shadow.visible = false
+	large_shadow.visible = false
+
+func is_jumpable(target: Object, movement: Vector2) -> bool:
+	if target.direction == movement:
+		return true
+	return false
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_right"):
@@ -126,8 +163,10 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if player_state == PlayerState.TURNING:
 		return
-	elif not is_moving:
+	elif not is_moving and not is_jumping:
 		player_input()
+	elif not is_moving and is_jumping:
+		jump(delta)
 	elif input_dir != Vector2.ZERO:
 		anim_state.travel("Walk")
 		move(delta)

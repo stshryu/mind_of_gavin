@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://criqeiogq524q"
-path="res://.godot/imported/AnimatedFlower.png-a2f704651777e7f5b44db14d0bc413f6.ctex"
+uid="uid://cpi73o23ji2vw"
+path="res://.godot/imported/transparentledgeextend.png-2d8fdd86be828f5ceefe45f4603a8673.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/AnimatedFlower.png"
-dest_files=["res://.godot/imported/AnimatedFlower.png-a2f704651777e7f5b44db14d0bc413f6.ctex"]
+source_file="res://art/transparentledgeextend.png"
+dest_files=["res://.godot/imported/transparentledgeextend.png-2d8fdd86be828f5ceefe45f4603a8673.ctex"]
 
 [params]
 

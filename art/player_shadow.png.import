@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2xx2gjyhbgl4"
-path="res://.godot/imported/Slime.png-db49066ce19c889c17c8548f54369b85.ctex"
+uid="uid://hwivtloaanyh"
+path="res://.godot/imported/player_shadow.png-cc41d93af59bb4a46829d6ff918c701b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Slime.png"
-dest_files=["res://.godot/imported/Slime.png-db49066ce19c889c17c8548f54369b85.ctex"]
+source_file="res://art/player_shadow.png"
+dest_files=["res://.godot/imported/player_shadow.png-cc41d93af59bb4a46829d6ff918c701b.ctex"]
 
 [params]
 
