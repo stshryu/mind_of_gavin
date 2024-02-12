@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c30k60umav0an"]
+[gd_scene load_steps=4 format=3 uid="uid://c30k60umav0an"]
 
 [ext_resource type="Texture2D" uid="uid://cysd6mb7lyo4b" path="res://art/buildings/house1.png" id="1_smx7p"]
+[ext_resource type="PackedScene" uid="uid://tfjvhpmo6837" path="res://scenes/buildings/door.tscn" id="2_n3ypy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwejj"]
 size = Vector2(80, 48)
 
 [node name="TemplateHouse" type="StaticBody2D"]
+z_index = 1
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 0
 
@@ -16,3 +19,7 @@ centered = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(40, 56)
 shape = SubResource("RectangleShape2D_dwejj")
+
+[node name="Door" parent="." instance=ExtResource("2_n3ypy")]
+position = Vector2(16, 64)
+next_scene_path = "res://scenes/template_house_floor_1.tscn"
