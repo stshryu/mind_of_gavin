@@ -29,7 +29,7 @@ var facing_direction = FacingDirection.DOWN
 var prev_player_state = PlayerState.IDLE 
 
 var init_pos: Vector2 = Vector2.ZERO
-var input_dir: Vector2 = Vector2.ZERO
+var input_dir: Vector2 = Vector2(0,1)
 var is_moving: bool = false
 var can_move: bool = true
 var is_jumping: bool = false
@@ -38,6 +38,12 @@ var percent_moved: float = 0.0
 # Each key is added to a stack and removed as keys are depressed (for emulating GBA movements) 
 var direction_keys: Array = [] 
 
+func set_spawn(location: Vector2, direction: Vector2):
+	anim_tree.set("parameters/Idle/blend_position", direction)
+	anim_tree.set("parameters/Walk/blend_position", direction)
+	anim_tree.set("parameters/Turn/blend_position", direction)
+	position = location
+	
 func player_input() -> void:
 	if len(direction_keys) == 0 or direction_keys.back() == null:
 		input_dir = Vector2.ZERO
@@ -175,7 +181,7 @@ func travel(delta):
 		is_moving = false
 		can_move = false
 		anim_player.play("Vanish")
-		emit_signal("player")
+		emit_signal("player_entered_door")
 		#$Camera2D.queue_free()
 	else:
 		position = init_pos + (input_dir * TILE_SIZE * percent_moved)
@@ -187,6 +193,9 @@ func _ready() -> void:
 	init_pos = position
 	raycast_list.append(player_ray)
 	raycast_list.append(travel_ray)
+	anim_tree.set("parameters/Idle/blend_position", input_dir)
+	anim_tree.set("parameters/Walk/blend_position", input_dir)
+	anim_tree.set("parameters/Turn/blend_position", input_dir)
 
 func is_jumpable(target: Object, movement: Vector2) -> bool:
 	if target.direction == movement:
