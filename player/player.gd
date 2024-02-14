@@ -31,7 +31,7 @@ var prev_player_state = PlayerState.IDLE
 var init_pos: Vector2 = Vector2.ZERO
 var input_dir: Vector2 = Vector2(0,1)
 var is_moving: bool = false
-var can_move: bool = true
+var can_act: bool = true
 var is_jumping: bool = false
 var is_traveling: bool = false
 var percent_moved: float = 0.0
@@ -179,7 +179,7 @@ func travel(delta):
 		position = init_pos + (input_dir * TILE_SIZE)
 		percent_moved = 0.0
 		is_moving = false
-		can_move = false
+		can_act = false
 		anim_player.play("Vanish")
 		emit_signal("player_entered_door")
 		#$Camera2D.queue_free()
@@ -226,7 +226,7 @@ func _process(_delta: float) -> void:
 			direction_keys.clear()
 
 func _physics_process(delta: float) -> void:
-	if player_state == PlayerState.TURNING or not can_move:
+	if player_state == PlayerState.TURNING or not can_act:
 		return
 	elif not is_moving and not is_jumping:
 		player_input()
