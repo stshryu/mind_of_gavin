@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c5t1r2eawu48i"]
 
-[ext_resource type="Script" path="res://scenes/TallGrass.gd" id="1_x26ik"]
+[ext_resource type="Script" path="res://scenes/terrain/TallGrass.gd" id="1_x26ik"]
 [ext_resource type="Texture2D" uid="uid://d2yle2fkg6pr1" path="res://art/grass/tall_grass.png" id="2_yl4l8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wmpn"]

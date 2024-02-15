@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var anim_player = $AnimationPlayer
 @onready var GRASS_OVERLAY_TEXTURE = preload("res://art/grass/stepped_tall_grass.png")
-@onready var GRASS_STEP_EFFECT = preload("res://art/grass/grass_step_effect.tscn")
+@onready var GRASS_STEP_EFFECT = preload("res://scenes/terrain/grass_step_effect.tscn")
 
 var grass_overlay: TextureRect = null
 
