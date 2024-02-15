@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 @export var walk_speed: float = 10.0
-@export var jump_speed: float = 8.0 
-@export var jump_height: Array = [-3.0,-1.0]
+@export var jump_speed: float = 8.0
+@export var jump_height: Array = [-4.0,-2.0]
 
 const TILE_SIZE: int = 16
 const dust_effect = preload("res://scenes/landing_dust_effect.tscn")
@@ -122,11 +122,11 @@ func jump(delta: float) -> void:
 
 func _animate_jump(playing: bool) -> void:
 	if playing:
-		small_shadow.visible = true if percent_moved <= 1.0 else false
-		large_shadow.visible = true if percent_moved > 1.0 else false
-		if percent_moved <= 1.0:
+		small_shadow.visible = true if percent_moved <= 1.5 else false
+		large_shadow.visible = true if percent_moved > 1.5 else false
+		if percent_moved <= 1.5:
 			player_sprite.set_offset(Vector2(0, jump_height[0]))
-		elif percent_moved > 1.0:
+		elif percent_moved > 1.5:
 			player_sprite.set_offset(Vector2(0, jump_height[1]))
 	else:
 		player_sprite.set_offset(Vector2.ZERO)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh7krxdgor8up"]
+
+[ext_resource type="Texture2D" uid="uid://damtoldwfa653" path="res://art/UI/party_ui/PokemonPartyBG.png" id="1_urk3i"]
+
+[node name="PartyScreen" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_urk3i")
