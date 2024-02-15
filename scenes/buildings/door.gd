@@ -14,7 +14,7 @@ func _ready():
 	if not door_is_visible:
 		$Sprite2D.texture = null
 	sprite.visible = false
-	var player = find_parent("CurrentScene").get_children().back().find_child("Player")
+	var player = Utils.get_player()
 	player.player_entering_door.connect(enter_door)
 	player.player_entered_door.connect(close_door)
 	
@@ -25,7 +25,7 @@ func close_door():
 	if player_entered: anim_player.play("CloseDoor")
 	
 func transition_scene():
-	if player_entered: get_node(NodePath("/root/SceneManager")) \
+	if player_entered: Utils.get_scene_manager() \
 		.transition_to_scene(next_scene_path, spawn_location, spawn_direction)
 
 func _on_body_entered(body):

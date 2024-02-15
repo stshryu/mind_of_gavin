@@ -8,6 +8,7 @@ extends CanvasLayer
 @export var init_y: int = 7
 @export var offset_y: int = 16
 
+var scene_manager: Node2D
 enum CURRENTSCREEN { NOTHING, MENU, PARTYSCREEN }
 var current_screen = CURRENTSCREEN.NOTHING
 var selected_option: int = 0
@@ -16,18 +17,15 @@ var menu_opt_length: int
 var player: Object
 
 func _ready():
+	scene_manager = Utils.get_scene_manager()
 	menu_options = vboxcontainer.get_children()
 	menu_opt_length = menu_options.size()
 	menu.visible = false
 	partyscreen.visible = false
 	select_arrow.position.y = init_y + (selected_option % menu_opt_length) * offset_y
-
-func _get_player_instance() -> void:
-	var current_scene = get_parent().get_node("CurrentScene").get_children().back()
-	player = current_scene.find_children("Player").back()
 	
 func _unhandled_input(event):
-	_get_player_instance()
+	player = Utils.get_player()
 	match current_screen:
 		CURRENTSCREEN.NOTHING:
 			if event.is_action_pressed("menu"):
@@ -42,7 +40,6 @@ func _unhandled_input(event):
 				player.can_act = true
 			elif event.is_action_pressed("select"):
 				_menu_options()
-				#get_parent().transition_to_party_screen()
 			elif event.is_action_pressed("ui_down"):
 				selected_option += 1
 				select_arrow.position.y = init_y + (selected_option % menu_opt_length) * offset_y
