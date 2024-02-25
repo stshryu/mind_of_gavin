@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5yybo85qorsd"]
+[gd_scene load_steps=7 format=3 uid="uid://c5yybo85qorsd"]
 
 [ext_resource type="Script" path="res://scenes/ui/menu.gd" id="1_1fwcc"]
 [ext_resource type="Texture2D" uid="uid://dl2m34o7cop8v" path="res://art/UI/menu1.png" id="1_q51l6"]
 [ext_resource type="FontFile" uid="uid://ekkb3nu466cq" path="res://art/UI/pkmnfl.ttf" id="3_sqwge"]
 [ext_resource type="Texture2D" uid="uid://b4fpfjhc7vn5g" path="res://art/UI/ui_arrow_left_right.png" id="4_y2syw"]
 [ext_resource type="PackedScene" uid="uid://bh7krxdgor8up" path="res://scenes/ui/party_screen.tscn" id="5_wn2k7"]
+[ext_resource type="PackedScene" uid="uid://cw4rs7ubqkxye" path="res://scenes/ui/bag_screen.tscn" id="6_smwqs"]
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_1fwcc")
@@ -97,3 +98,5 @@ offset_bottom = 33.0
 texture = ExtResource("4_y2syw")
 
 [node name="PartyScreen" parent="." instance=ExtResource("5_wn2k7")]
+
+[node name="BagScreen" parent="." instance=ExtResource("6_smwqs")]

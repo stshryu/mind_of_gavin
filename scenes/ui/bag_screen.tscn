@@ -1,0 +1,72 @@
+[gd_scene load_steps=13 format=3 uid="uid://cw4rs7ubqkxye"]
+
+[ext_resource type="Script" path="res://scenes/ui/bag_screen.gd" id="1_0sgc7"]
+[ext_resource type="Texture2D" uid="uid://crmt4mxdgfrbl" path="res://art/UI/bag_ui/bag_background.png" id="1_kcbrn"]
+[ext_resource type="Texture2D" uid="uid://bfjjksh86x5d" path="res://art/UI/bag_ui/bag_05.png" id="2_l32sw"]
+[ext_resource type="Texture2D" uid="uid://caumyvqxsl61k" path="res://art/UI/bag_ui/key_items_sign.png" id="3_irhlf"]
+[ext_resource type="Texture2D" uid="uid://bhlb3yv63qlms" path="res://art/UI/bag_ui/bag_01.png" id="4_wum13"]
+[ext_resource type="Texture2D" uid="uid://dwj3tys8a0lnc" path="res://art/UI/bag_ui/item_sign.png" id="5_hso6q"]
+[ext_resource type="Texture2D" uid="uid://bsgx2oivulpv1" path="res://art/UI/bag_ui/bag_02.png" id="6_jl5po"]
+[ext_resource type="Texture2D" uid="uid://be4rvrst13wde" path="res://art/UI/bag_ui/tmandhm_sign.png" id="7_moh54"]
+[ext_resource type="Texture2D" uid="uid://rwqxm34kypms" path="res://art/UI/bag_ui/bag_03.png" id="8_64omk"]
+[ext_resource type="Texture2D" uid="uid://c667dtw0gdtxa" path="res://art/UI/bag_ui/berries_sign.png" id="9_4ff36"]
+[ext_resource type="Texture2D" uid="uid://ducuhx1rwmr05" path="res://art/UI/bag_ui/bag_04.png" id="10_3wdbp"]
+[ext_resource type="Texture2D" uid="uid://jbcohigyajn" path="res://art/UI/bag_ui/pokeball_sign.png" id="11_xttop"]
+
+[node name="BagScreen" type="Node2D"]
+script = ExtResource("1_0sgc7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_kcbrn")
+
+[node name="KeyItems" type="Node2D" parent="."]
+
+[node name="Bag" type="Sprite2D" parent="KeyItems"]
+position = Vector2(72, 72)
+texture = ExtResource("2_l32sw")
+
+[node name="Title" type="Sprite2D" parent="KeyItems"]
+position = Vector2(64, 16)
+texture = ExtResource("3_irhlf")
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Bag" type="Sprite2D" parent="Items"]
+position = Vector2(72, 72)
+texture = ExtResource("4_wum13")
+
+[node name="Title" type="Sprite2D" parent="Items"]
+position = Vector2(64, 16)
+texture = ExtResource("5_hso6q")
+
+[node name="TMHM" type="Node2D" parent="."]
+
+[node name="Bag" type="Sprite2D" parent="TMHM"]
+position = Vector2(72, 72)
+texture = ExtResource("6_jl5po")
+
+[node name="Title" type="Sprite2D" parent="TMHM"]
+position = Vector2(64, 16)
+texture = ExtResource("7_moh54")
+
+[node name="Berries" type="Node2D" parent="."]
+
+[node name="Bag" type="Sprite2D" parent="Berries"]
+position = Vector2(72, 72)
+texture = ExtResource("8_64omk")
+
+[node name="Title" type="Sprite2D" parent="Berries"]
+position = Vector2(64, 16)
+texture = ExtResource("9_4ff36")
+
+[node name="Balls" type="Node2D" parent="."]
+
+[node name="Bag" type="Sprite2D" parent="Balls"]
+position = Vector2(72, 72)
+texture = ExtResource("10_3wdbp")
+
+[node name="Title" type="Sprite2D" parent="Balls"]
+position = Vector2(64, 16)
+texture = ExtResource("11_xttop")

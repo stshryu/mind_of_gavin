@@ -4,12 +4,13 @@ extends CanvasLayer
 @onready var menu = $Control
 @onready var vboxcontainer = $Control/NinePatchRect/VBoxContainer
 @onready var partyscreen = $PartyScreen
+@onready var bagscreen = $BagScreen
 
 @export var init_y: int = 7
 @export var offset_y: int = 16
 
 var scene_manager: Node2D
-enum CURRENTSCREEN { NOTHING, MENU, PARTYSCREEN }
+enum CURRENTSCREEN { NOTHING, MENU, PARTYSCREEN, BAG }
 var current_screen = CURRENTSCREEN.NOTHING
 var selected_option: int = 0
 var menu_options: Array
@@ -22,6 +23,7 @@ func _ready():
 	menu_opt_length = menu_options.size()
 	menu.visible = false
 	partyscreen.visible = false
+	bagscreen.visible = false
 	select_arrow.position.y = init_y + (selected_option % menu_opt_length) * offset_y
 	
 func _unhandled_input(event):
@@ -46,10 +48,11 @@ func _unhandled_input(event):
 			elif event.is_action_pressed("ui_up"):
 				selected_option = menu_opt_length - 1 if selected_option == 0 else selected_option - 1
 				select_arrow.position.y = init_y + (selected_option % menu_opt_length) * offset_y
-		CURRENTSCREEN.PARTYSCREEN:
+		CURRENTSCREEN.PARTYSCREEN, CURRENTSCREEN.BAG:
 			if event.is_action_pressed("back"):
 				menu.visible = true
 				partyscreen.visible = false
+				bagscreen.visible = false
 				current_screen = CURRENTSCREEN.MENU
 
 func _menu_options() -> void:
@@ -60,7 +63,9 @@ func _menu_options() -> void:
 			partyscreen.visible = true
 			current_screen = CURRENTSCREEN.PARTYSCREEN
 		"Bag":
-			print_debug("bag")
+			menu.visible = false
+			bagscreen.visible = true
+			current_screen = CURRENTSCREEN.BAG
 		"Player":
 			print_debug("player")
 		"Options":
