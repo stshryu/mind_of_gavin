@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh7krxdgor8up"]
+[gd_scene load_steps=8 format=3 uid="uid://bh7krxdgor8up"]
 
+[ext_resource type="Script" path="res://scenes/ui/party_screen.gd" id="1_p5blo"]
 [ext_resource type="Texture2D" uid="uid://damtoldwfa653" path="res://art/UI/party_ui/PokemonPartyBG.png" id="1_urk3i"]
 [ext_resource type="Texture2D" uid="uid://nf7e0oysbx7l" path="res://art/UI/party_ui/main_pokemon_background.png" id="2_d2k18"]
 [ext_resource type="Texture2D" uid="uid://bqlio0v54hxyh" path="res://art/pokemon/Charmander.png" id="3_nyw7o"]
@@ -43,28 +44,35 @@ _data = {
 }
 
 [node name="PartyScreen" type="Node2D"]
+script = ExtResource("1_p5blo")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+offset_right = 240.0
+offset_bottom = 160.0
 texture = ExtResource("1_urk3i")
 
-[node name="PrimarySlot" type="Node2D" parent="."]
+[node name="PrimarySlot" type="Node2D" parent="Control"]
 
-[node name="Background" type="Sprite2D" parent="PrimarySlot"]
+[node name="Background" type="Sprite2D" parent="Control/PrimarySlot"]
 position = Vector2(2, 18)
 texture = ExtResource("2_d2k18")
 centered = false
 hframes = 2
 
-[node name="PartySprite" type="Sprite2D" parent="PrimarySlot"]
+[node name="PartySprite" type="Sprite2D" parent="Control/PrimarySlot"]
 position = Vector2(17, 40)
 texture = ExtResource("3_nyw7o")
 hframes = 2
 region_enabled = true
 region_rect = Rect2(30, 9, 70, 24)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PrimarySlot"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/PrimarySlot"]
 libraries = {
 "": SubResource("AnimationLibrary_3hk5n")
 }

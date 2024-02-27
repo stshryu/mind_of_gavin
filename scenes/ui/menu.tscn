@@ -100,3 +100,6 @@ texture = ExtResource("4_y2syw")
 [node name="PartyScreen" parent="." instance=ExtResource("5_wn2k7")]
 
 [node name="BagScreen" parent="." instance=ExtResource("6_smwqs")]
+
+[connection signal="active_bag_menu" from="." to="BagScreen" method="_on_menu_active_bag_menu"]
+[connection signal="active_party_menu" from="." to="PartyScreen" method="_on_menu_active_party_menu"]

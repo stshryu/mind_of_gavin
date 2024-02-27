@@ -10,12 +10,19 @@ extends CanvasLayer
 @export var offset_y: int = 16
 
 var scene_manager: Node2D
-enum CURRENTSCREEN { NOTHING, MENU, PARTYSCREEN, BAG }
+enum CURRENTSCREEN { NOTHING, MENU, PARTY, BAG, PLAYER, OPTION }
 var current_screen = CURRENTSCREEN.NOTHING
 var selected_option: int = 0
 var menu_options: Array
 var menu_opt_length: int 
 var player: Object
+
+var is_active_screen = true
+
+signal active_bag_menu
+signal active_party_menu
+signal active_player_menu
+signal active_option_menu
 
 func _ready():
 	scene_manager = Utils.get_scene_manager()
@@ -27,6 +34,8 @@ func _ready():
 	select_arrow.position.y = init_y + (selected_option % menu_opt_length) * offset_y
 	
 func _unhandled_input(event):
+	if !is_active_screen:
+		return
 	player = Utils.get_player()
 	match current_screen:
 		CURRENTSCREEN.NOTHING:
@@ -41,31 +50,46 @@ func _unhandled_input(event):
 				current_screen = CURRENTSCREEN.NOTHING
 				player.can_act = true
 			elif event.is_action_pressed("select"):
-				_menu_options()
+				_menu_options(event)
 			elif event.is_action_pressed("ui_down"):
 				selected_option += 1
 				select_arrow.position.y = init_y + (selected_option % menu_opt_length) * offset_y
 			elif event.is_action_pressed("ui_up"):
 				selected_option = menu_opt_length - 1 if selected_option == 0 else selected_option - 1
 				select_arrow.position.y = init_y + (selected_option % menu_opt_length) * offset_y
-		CURRENTSCREEN.PARTYSCREEN, CURRENTSCREEN.BAG:
+		CURRENTSCREEN.PARTY, CURRENTSCREEN.BAG, CURRENTSCREEN.PLAYER, CURRENTSCREEN.OPTION:
 			if event.is_action_pressed("back"):
 				menu.visible = true
-				partyscreen.visible = false
-				bagscreen.visible = false
 				current_screen = CURRENTSCREEN.MENU
 
-func _menu_options() -> void:
+func active_main_menu() -> void:
+	is_active_screen = true
+	menu.visible = true
+
+func open_screen(screen: CURRENTSCREEN) -> void:
+	is_active_screen = false
+	match screen:
+		CURRENTSCREEN.PARTY:
+			current_screen = CURRENTSCREEN.PARTY
+			active_party_menu.emit()
+		CURRENTSCREEN.BAG:
+			current_screen = CURRENTSCREEN.BAG
+			active_bag_menu.emit()
+		CURRENTSCREEN.PLAYER:
+			current_screen = CURRENTSCREEN.PLAYER
+			active_player_menu.emit()
+		CURRENTSCREEN.OPTION:
+			current_screen = CURRENTSCREEN.OPTION
+			active_option_menu.emit()
+	menu.visible = false
+	
+func _menu_options(event) -> void:
 	var current_selection = menu_options[selected_option % menu_opt_length]
 	match current_selection.name:
 		"Pokemon":
-			menu.visible = false
-			partyscreen.visible = true
-			current_screen = CURRENTSCREEN.PARTYSCREEN
+			open_screen(CURRENTSCREEN.PARTY)
 		"Bag":
-			menu.visible = false
-			bagscreen.visible = true
-			current_screen = CURRENTSCREEN.BAG
+			open_screen(CURRENTSCREEN.BAG)
 		"Player":
 			print_debug("player")
 		"Options":
