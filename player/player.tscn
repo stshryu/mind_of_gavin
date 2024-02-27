@@ -1,8 +1,21 @@
-[gd_scene load_steps=36 format=3 uid="uid://ceiuillv8yn1h"]
+[gd_scene load_steps=38 format=3 uid="uid://ceiuillv8yn1h"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_higrp"]
 [ext_resource type="Texture2D" uid="uid://cr5xdgldd66sl" path="res://art/SpriteSheet.png" id="1_ke5h6"]
+[ext_resource type="Script" path="res://models/stats/base_stats.gd" id="2_mhq8u"]
 [ext_resource type="Texture2D" uid="uid://hwivtloaanyh" path="res://art/player_shadow.png" id="2_n1ley"]
+
+[sub_resource type="Resource" id="Resource_c3nxr"]
+script = ExtResource("2_mhq8u")
+health = 0
+base_stats = {
+"cha": 10,
+"con": 10,
+"dex": 10,
+"int": 10,
+"str": 10,
+"wis": 10
+}
 
 [sub_resource type="Animation" id="Animation_3jamv"]
 resource_name = "IdleDown"
@@ -421,6 +434,7 @@ size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_higrp")
+stats = SubResource("Resource_c3nxr")
 
 [node name="LargeShadow" type="Sprite2D" parent="."]
 visible = false

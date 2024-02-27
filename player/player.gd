@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var walk_speed: float = 10.0
 @export var jump_speed: float = 8.0
 @export var jump_height: Array = [-4.0,-2.0]
+@export var stats: Resource
 
 const TILE_SIZE: int = 16
 const dust_effect = preload("res://scenes/landing_dust_effect.tscn")
