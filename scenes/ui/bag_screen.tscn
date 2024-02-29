@@ -24,59 +24,10 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
 offset_right = 240.0
 offset_bottom = 160.0
 texture = ExtResource("1_kcbrn")
-
-[node name="KeyItems" type="Node2D" parent="Control"]
-
-[node name="Bag" type="Sprite2D" parent="Control/KeyItems"]
-position = Vector2(72, 72)
-texture = ExtResource("2_l32sw")
-
-[node name="Title" type="Sprite2D" parent="Control/KeyItems"]
-position = Vector2(64, 16)
-texture = ExtResource("3_irhlf")
-
-[node name="Items" type="Node2D" parent="Control"]
-
-[node name="Bag" type="Sprite2D" parent="Control/Items"]
-position = Vector2(72, 72)
-texture = ExtResource("4_wum13")
-
-[node name="Title" type="Sprite2D" parent="Control/Items"]
-position = Vector2(64, 16)
-texture = ExtResource("5_hso6q")
-
-[node name="TMHM" type="Node2D" parent="Control"]
-
-[node name="Bag" type="Sprite2D" parent="Control/TMHM"]
-position = Vector2(72, 72)
-texture = ExtResource("6_jl5po")
-
-[node name="Title" type="Sprite2D" parent="Control/TMHM"]
-position = Vector2(64, 16)
-texture = ExtResource("7_moh54")
-
-[node name="Berries" type="Node2D" parent="Control"]
-
-[node name="Bag" type="Sprite2D" parent="Control/Berries"]
-position = Vector2(72, 72)
-texture = ExtResource("8_64omk")
-
-[node name="Title" type="Sprite2D" parent="Control/Berries"]
-position = Vector2(64, 16)
-texture = ExtResource("9_4ff36")
-
-[node name="Balls" type="Node2D" parent="Control"]
-
-[node name="Bag" type="Sprite2D" parent="Control/Balls"]
-position = Vector2(72, 72)
-texture = ExtResource("10_3wdbp")
-
-[node name="Title" type="Sprite2D" parent="Control/Balls"]
-position = Vector2(64, 16)
-texture = ExtResource("11_xttop")
 
 [node name="SelectPoint" type="TextureRect" parent="Control"]
 custom_minimum_size = Vector2(1, 1)
@@ -93,3 +44,58 @@ grow_vertical = 2
 texture = ExtResource("13_4w8ll")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="OptionsContainer" type="Control" parent="Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="KeyItems" type="Node2D" parent="Control/OptionsContainer"]
+
+[node name="Bag" type="Sprite2D" parent="Control/OptionsContainer/KeyItems"]
+position = Vector2(72, 72)
+texture = ExtResource("2_l32sw")
+
+[node name="Title" type="Sprite2D" parent="Control/OptionsContainer/KeyItems"]
+position = Vector2(64, 16)
+texture = ExtResource("3_irhlf")
+
+[node name="Items" type="Node2D" parent="Control/OptionsContainer"]
+
+[node name="Bag" type="Sprite2D" parent="Control/OptionsContainer/Items"]
+position = Vector2(72, 72)
+texture = ExtResource("4_wum13")
+
+[node name="Title" type="Sprite2D" parent="Control/OptionsContainer/Items"]
+position = Vector2(64, 16)
+texture = ExtResource("5_hso6q")
+
+[node name="TMHM" type="Node2D" parent="Control/OptionsContainer"]
+
+[node name="Bag" type="Sprite2D" parent="Control/OptionsContainer/TMHM"]
+position = Vector2(72, 72)
+texture = ExtResource("6_jl5po")
+
+[node name="Title" type="Sprite2D" parent="Control/OptionsContainer/TMHM"]
+position = Vector2(64, 16)
+texture = ExtResource("7_moh54")
+
+[node name="Berries" type="Node2D" parent="Control/OptionsContainer"]
+
+[node name="Bag" type="Sprite2D" parent="Control/OptionsContainer/Berries"]
+position = Vector2(72, 72)
+texture = ExtResource("8_64omk")
+
+[node name="Title" type="Sprite2D" parent="Control/OptionsContainer/Berries"]
+position = Vector2(64, 16)
+texture = ExtResource("9_4ff36")
+
+[node name="Balls" type="Node2D" parent="Control/OptionsContainer"]
+
+[node name="Bag" type="Sprite2D" parent="Control/OptionsContainer/Balls"]
+position = Vector2(72, 72)
+texture = ExtResource("10_3wdbp")
+
+[node name="Title" type="Sprite2D" parent="Control/OptionsContainer/Balls"]
+position = Vector2(64, 16)
+texture = ExtResource("11_xttop")
