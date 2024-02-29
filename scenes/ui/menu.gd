@@ -50,7 +50,7 @@ func _unhandled_input(event):
 				current_screen = CURRENTSCREEN.NOTHING
 				player.can_act = true
 			elif event.is_action_pressed("select"):
-				_menu_options(event)
+				_menu_options()
 			elif event.is_action_pressed("ui_down"):
 				selected_option += 1
 				select_arrow.position.y = init_y + (selected_option % menu_opt_length) * offset_y
@@ -83,7 +83,7 @@ func open_screen(screen: CURRENTSCREEN) -> void:
 			active_option_menu.emit()
 	menu.visible = false
 	
-func _menu_options(event) -> void:
+func _menu_options() -> void:
 	var current_selection = menu_options[selected_option % menu_opt_length]
 	match current_selection.name:
 		"Pokemon":

@@ -4,7 +4,6 @@ extends Node2D
 
 var scene_manager: Node2D
 
-
 var is_active_screen = false
 
 signal active_main_menu
@@ -28,4 +27,3 @@ func _unhandled_input(event):
 		return
 	if event.is_action_pressed("back"):
 		open_main_menu()
-			
