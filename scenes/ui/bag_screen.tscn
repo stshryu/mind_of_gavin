@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cw4rs7ubqkxye"]
+[gd_scene load_steps=21 format=3 uid="uid://cw4rs7ubqkxye"]
 
 [ext_resource type="Script" path="res://scenes/ui/bag_screen.gd" id="1_0sgc7"]
 [ext_resource type="Texture2D" uid="uid://crmt4mxdgfrbl" path="res://art/UI/bag_ui/bag_background.png" id="1_kcbrn"]
@@ -13,6 +13,159 @@
 [ext_resource type="Texture2D" uid="uid://ducuhx1rwmr05" path="res://art/UI/bag_ui/bag_04.png" id="10_3wdbp"]
 [ext_resource type="Texture2D" uid="uid://jbcohigyajn" path="res://art/UI/bag_ui/pokeball_sign.png" id="11_xttop"]
 [ext_resource type="Texture2D" uid="uid://btb40284mmp7u" path="res://art/UI/bag_ui/point.png" id="13_4w8ll"]
+
+[sub_resource type="Animation" id="Animation_dtva0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KeyItems/Bag:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0698132]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Items/Bag:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TMHM/Bag:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Berries/Bag:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Balls/Bag:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_cqbgj"]
+resource_name = "balls"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Balls/Bag:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.0698132, -0.0349066, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_b03e6"]
+resource_name = "berries"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Berries/Bag:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.0698132, -0.0349066, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_k33h4"]
+resource_name = "items"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Items/Bag:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.0698132, -0.0349066, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_h6ymc"]
+resource_name = "keyitems"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KeyItems/Bag:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.0698132, -0.0349066, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5moa7"]
+resource_name = "tmhm"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TMHM/Bag:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.0698132, -0.0349066, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3odvy"]
+_data = {
+"Balls": SubResource("Animation_cqbgj"),
+"Berries": SubResource("Animation_b03e6"),
+"Items": SubResource("Animation_k33h4"),
+"KeyItems": SubResource("Animation_h6ymc"),
+"RESET": SubResource("Animation_dtva0"),
+"TMHM": SubResource("Animation_5moa7")
+}
 
 [node name="BagScreen" type="Node2D"]
 script = ExtResource("1_0sgc7")
@@ -54,6 +207,7 @@ offset_bottom = 40.0
 
 [node name="Bag" type="Sprite2D" parent="Control/OptionsContainer/KeyItems"]
 position = Vector2(72, 72)
+rotation = 0.0698132
 texture = ExtResource("2_l32sw")
 
 [node name="Title" type="Sprite2D" parent="Control/OptionsContainer/KeyItems"]
@@ -73,7 +227,7 @@ texture = ExtResource("5_hso6q")
 [node name="TMHM" type="Node2D" parent="Control/OptionsContainer"]
 
 [node name="Bag" type="Sprite2D" parent="Control/OptionsContainer/TMHM"]
-position = Vector2(72, 72)
+position = Vector2(73, 72)
 texture = ExtResource("6_jl5po")
 
 [node name="Title" type="Sprite2D" parent="Control/OptionsContainer/TMHM"]
@@ -99,3 +253,9 @@ texture = ExtResource("10_3wdbp")
 [node name="Title" type="Sprite2D" parent="Control/OptionsContainer/Balls"]
 position = Vector2(64, 16)
 texture = ExtResource("11_xttop")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
+root_node = NodePath("../OptionsContainer")
+libraries = {
+"": SubResource("AnimationLibrary_3odvy")
+}

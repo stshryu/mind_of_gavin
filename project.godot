@@ -31,6 +31,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="mind_of_gavin"
 
+[global]
+
+top=false
+
 [input]
 
 menu={
