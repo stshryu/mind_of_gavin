@@ -5,6 +5,8 @@
 
 [resource]
 script = ExtResource("1_wx8ba")
+id = "small_mana_pot"
 name = "Small Mana Potion"
+quantity = 0
 description = "Restores a small amount of mana when used."
 texture = ExtResource("2_inbqn")

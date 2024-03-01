@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bf0pksa266f1o"]
+
+[ext_resource type="Script" path="res://models/items/item.gd" id="1_gbimo"]
+[ext_resource type="Texture2D" uid="uid://bu4u3pg5bdaph" path="res://art/items/master.png" id="2_jpx7m"]
+
+[resource]
+script = ExtResource("1_gbimo")
+id = "masterball"
+name = "Master Ball"
+quantity = 0
+description = "A ball with a 100% capture rate."
+texture = ExtResource("2_jpx7m")

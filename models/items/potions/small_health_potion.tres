@@ -5,6 +5,8 @@
 
 [resource]
 script = ExtResource("1_vrm2r")
+id = "small_health_pot"
 name = "Small Health Potion"
+quantity = 0
 description = "Restores a small amount of health when used."
 texture = ExtResource("2_fxdyw")

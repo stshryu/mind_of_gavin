@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dl47px56y76ud"]
+
+[ext_resource type="Script" path="res://models/items/item.gd" id="1_2dbvd"]
+[ext_resource type="Texture2D" uid="uid://bngjsh1qt7jjv" path="res://art/items/Egg_item.png" id="2_qj0k4"]
+
+[resource]
+script = ExtResource("1_2dbvd")
+id = "egg"
+name = "Egg"
+quantity = 0
+description = "Egg."
+texture = ExtResource("2_qj0k4")

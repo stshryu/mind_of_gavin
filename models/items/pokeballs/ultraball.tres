@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://byubg8o3d7q55"]
+
+[ext_resource type="Script" path="res://models/items/item.gd" id="1_6s42e"]
+[ext_resource type="Texture2D" uid="uid://b40sl42jr5bgg" path="res://art/items/ultra.png" id="2_og1su"]
+
+[resource]
+script = ExtResource("1_6s42e")
+id = "ultraball"
+name = "Ultra Ball"
+quantity = 0
+description = "A ball with a high catch rate."
+texture = ExtResource("2_og1su")

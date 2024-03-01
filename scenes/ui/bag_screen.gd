@@ -29,9 +29,6 @@ func _ready():
 
 func _on_menu_active_bag_menu():
 	player_inventory = Utils.get_player_inventory()
-	var key_items = player_inventory.inventory["KeyItems"]
-	for item in key_items:
-		print(item.name)
 	is_active_screen = true
 	scene_root.visible = true
 	set_active_bag_option()

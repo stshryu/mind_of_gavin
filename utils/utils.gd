@@ -8,12 +8,12 @@ func _ready() -> void:
 func start() -> void:
 	# logic to read/write save file should go here eventually
 	player_inventory = PlayerInventory.new()
-	var small_health_potion = load("res://models/items/potions/small_health_potion.tres")
-	var small_mana_potion = load("res://models/items/potions/small_mana_potion.tres")
-	player_inventory.inventory["KeyItems"] = [small_health_potion, small_mana_potion]
 
 func get_player_inventory() -> PlayerInventory:
 	return player_inventory
+	
+func set_player_inventory(updated_inv: PlayerInventory) -> void:
+	player_inventory = updated_inv
 
 func get_scene_manager() -> Object:
 	return get_node("/root/SceneManager")
