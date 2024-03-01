@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cvel4bxfhtf62"]
+
+[ext_resource type="Script" path="res://models/items/item.gd" id="1_vrm2r"]
+[ext_resource type="Texture2D" uid="uid://bifmjj1g3ggmm" path="res://art/items/LifePot.png" id="2_fxdyw"]
+
+[resource]
+script = ExtResource("1_vrm2r")
+name = "Small Health Potion"
+description = "Restores a small amount of health when used."
+texture = ExtResource("2_fxdyw")

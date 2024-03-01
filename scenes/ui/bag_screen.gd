@@ -13,6 +13,7 @@ var selected_option: int
 var scene_manager: Node2D
 var bag_options: Array
 var bag_opt_length: int
+var player_inventory: PlayerInventory
 
 var is_active_screen = false
 
@@ -25,11 +26,15 @@ func _ready():
 	bag_options = bag_option_root.get_children()
 	bag_opt_length = bag_options.size()
 	selected_option = 0
-	set_active_bag_option()
 
 func _on_menu_active_bag_menu():
+	player_inventory = Utils.get_player_inventory()
+	var key_items = player_inventory.inventory["KeyItems"]
+	for item in key_items:
+		print(item.name)
 	is_active_screen = true
 	scene_root.visible = true
+	set_active_bag_option()
 
 func open_main_menu():
 	is_active_screen = false

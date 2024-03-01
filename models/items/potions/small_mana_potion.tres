@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bd0e0cg50c8b1"]
+
+[ext_resource type="Script" path="res://models/items/item.gd" id="1_wx8ba"]
+[ext_resource type="Texture2D" uid="uid://0uhxjboxyehy" path="res://art/items/WaterPot.png" id="2_inbqn"]
+
+[resource]
+script = ExtResource("1_wx8ba")
+name = "Small Mana Potion"
+description = "Restores a small amount of mana when used."
+texture = ExtResource("2_inbqn")
