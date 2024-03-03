@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_vrm2r")
-id = "small_health_pot"
+id = "small_health_potion"
 name = "Small Health Potion"
 quantity = 0
 description = "Restores a small amount of health when used."

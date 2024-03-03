@@ -4,11 +4,12 @@ extends Node2D
 @onready var bag_option_root = $Control/OptionsContainer
 @onready var animation_player = $Control/AnimationPlayer
 @onready var scene_root = $"."
+@onready var bag_selections_container = $Control/VBoxContainer
 
 @export var init_x = 43
 @export var offset_x = 8
 
-enum BAGSCREEN { KEY, ITEM, TMHM, BERRIES, BALLS }
+var bag_unit_scene = preload("res://scenes/ui/bag_item_unit.tscn")
 var selected_option: int
 var scene_manager: Node2D
 var bag_options: Array
@@ -20,15 +21,18 @@ var is_active_screen = false
 signal active_main_menu
 
 func _ready():
-	active_main_menu.connect(get_parent().active_main_menu)
 	scene_root.visible = false
+	active_main_menu.connect(get_parent().active_main_menu)
 	scene_manager = Utils.get_scene_manager()
+	player_inventory = Utils.get_player_inventory()
 	bag_options = bag_option_root.get_children()
 	bag_opt_length = bag_options.size()
 	selected_option = 0
+	
+	# For testing
+	_testing()
 
 func _on_menu_active_bag_menu():
-	player_inventory = Utils.get_player_inventory()
 	is_active_screen = true
 	scene_root.visible = true
 	set_active_bag_option()
@@ -55,8 +59,33 @@ func set_active_bag_option():
 	select_point.position.x = init_x + (selected_option % bag_opt_length) * offset_x
 	for option in bag_options:
 		option.visible = true if option.name == active_option.name else false
+	_depopulate_container()
+	_populate_active_option(active_option)
 	animation_player.play(active_option.name)
 	
+func _depopulate_container() -> void:
+	for n in bag_selections_container.get_children():
+		bag_selections_container.remove_child(n)
+		n.queue_free()
+	
+func _populate_active_option(active_option: Object) -> void:
+	var current_items = player_inventory.inventory[active_option.name]
+	for item in current_items:
+		var instance = bag_unit_scene.instantiate()
+		bag_selections_container.add_child(_populate_option_field(instance, item))
+	
+func _populate_option_field(_inst, _opt):
+	_inst.find_child("Name").text = _opt.name
+	_inst.find_child("Quantity").text = "x" + "10"
+	return _inst
+	
+func _testing() -> void:
+	var rng = RandomNumberGenerator.new()
+	var test = [ "KeyItems", "Items", "TMHM", "Berries", "Balls" ]
+	for key in test:
+		for i in range(1, rng.randi_range(0, 10)):
+			player_inventory.inventory[key].append(ItemDict.loaded_items["KeyItems"]["egg"])
+
 # This bit of code below is "supposed" to create an animation through code so you don't have to animate
 # each individual bag sprite. Can't get it to work though, the documentation surrounding the AnimationPlayer
 # is too vague to really piece together what you need to write animations through code. Maybe its something

@@ -5,9 +5,9 @@ var pokeballpath:String = "res://models/items/pokeballs/"
 var potionpath:String = "res://models/items/potions/"
 
 var directories := {
-	"KeyItem": keyitempath,
-	"PokeBall": pokeballpath,
-	"Potion": potionpath
+	"KeyItems": keyitempath,
+	"PokeBalls": pokeballpath,
+	"Potions": potionpath
 }
 
 var loaded_items:Dictionary

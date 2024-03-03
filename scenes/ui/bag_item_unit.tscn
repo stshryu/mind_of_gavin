@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbtqngjo5k5bq"]
+
+[ext_resource type="FontFile" uid="uid://ekkb3nu466cq" path="res://art/fonts/pkmnfl.ttf" id="1_xb0jr"]
+
+[node name="BagItemUnit" type="HBoxContainer"]
+offset_right = 118.0
+offset_bottom = 12.0
+
+[node name="Name" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(57, 12)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.698039, 0.698039, 0.698039, 0.639216)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/normal_font = ExtResource("1_xb0jr")
+theme_override_font_sizes/normal_font_size = 12
+text = "Empty"
+
+[node name="Quantity" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(57, 12)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.698039, 0.698039, 0.698039, 0.639216)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/normal_font = ExtResource("1_xb0jr")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[right]x0[/right]"

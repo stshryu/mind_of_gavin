@@ -9,9 +9,7 @@ func _ready() -> void:
 	start()
 	
 func start() -> void:
-	save_data = SaveGame.load_save()
-	# logic to read/write save file should go here eventually
-	player_inventory = save_data.player_inventory
+	player_inventory = PlayerInventory.new()
 
 func get_player_inventory() -> PlayerInventory:
 	return player_inventory
