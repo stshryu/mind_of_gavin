@@ -4,7 +4,7 @@ extends Node2D
 @onready var bag_option_root = $Control/OptionsContainer
 @onready var animation_player = $Control/AnimationPlayer
 @onready var scene_root = $"."
-@onready var bag_selections_container = $Control/VBoxContainer
+@onready var bag_selections_container = $Control/MarginContainer/ContainerLayout
 
 @export var init_x = 43
 @export var offset_x = 8
@@ -75,16 +75,19 @@ func _populate_active_option(active_option: Object) -> void:
 		bag_selections_container.add_child(_populate_option_field(instance, item))
 	
 func _populate_option_field(_inst, _opt):
-	_inst.find_child("Name").text = _opt.name
-	_inst.find_child("Quantity").text = "x" + "10"
+	var textroot = _inst.find_child("Unit")
+	textroot.find_child("Name").text = _opt.name
+	textroot.find_child("Quantity").text = "[right]" + "x" + str(_opt.quantity) + "[/right]"
 	return _inst
 	
 func _testing() -> void:
 	var rng = RandomNumberGenerator.new()
 	var test = [ "KeyItems", "Items", "TMHM", "Berries", "Balls" ]
 	for key in test:
-		for i in range(1, rng.randi_range(0, 10)):
-			player_inventory.inventory[key].append(ItemDict.loaded_items["KeyItems"]["egg"])
+		for i in range(1, rng.randi_range(2, 10)):
+			var item = ItemDict.loaded_items["KeyItems"]["egg"].duplicate()
+			item.quantity = rng.randi_range(1, 99)
+			player_inventory.inventory[key].append(item)
 
 # This bit of code below is "supposed" to create an animation through code so you don't have to animate
 # each individual bag sprite. Can't get it to work though, the documentation surrounding the AnimationPlayer
