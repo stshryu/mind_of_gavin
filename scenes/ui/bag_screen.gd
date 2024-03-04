@@ -5,16 +5,23 @@ extends Node2D
 @onready var animation_player = $Control/AnimationPlayer
 @onready var scene_root = $"."
 @onready var bag_selections_container = $Control/MarginContainer/ContainerLayout
+@onready var bag_selection_desc = $Control/ItemDesc
+@onready var bag_selection_sprite = $Control/ItemSprite
+@onready var bag_select_arrow = $Control/ItemSelect
 
 @export var init_x = 43
 @export var offset_x = 8
 
 var bag_unit_scene = preload("res://scenes/ui/bag_item_unit.tscn")
 var selected_option: int
+var selected_item: int
 var scene_manager: Node2D
 var bag_options: Array
 var bag_opt_length: int
 var player_inventory: PlayerInventory
+var bag_unit_selection_hash = { "KeyItems": 0, "Items": 0, "Berries": 0, "Balls": 0, "TMHM": 0}
+var select_sprite_y_init: int = 18
+var select_sprite_y_offset: int = 15
 
 var is_active_screen = false
 
@@ -28,6 +35,7 @@ func _ready():
 	bag_options = bag_option_root.get_children()
 	bag_opt_length = bag_options.size()
 	selected_option = 0
+	selected_item = 0
 	
 	# For testing
 	_testing()
@@ -48,11 +56,20 @@ func _unhandled_input(event):
 	if event.is_action_pressed("back"):
 		open_main_menu()
 	elif event.is_action_pressed("ui_left"):
+		selected_item = 0
 		selected_option = bag_opt_length - 1 if selected_option == 0 else selected_option - 1
 		set_active_bag_option()
 	elif event.is_action_pressed("ui_right"):
+		selected_item = 0
 		selected_option += 1
 		set_active_bag_option()
+	elif event.is_action_pressed("ui_down"):
+		selected_item += 1
+		bag_select_arrow.position.y += select_sprite_y_offset
+	elif event.is_action_pressed("ui_up"):
+		selected_item = 0 if selected_item == 0 else selected_item - 1
+		bag_select_arrow.position.y = select_sprite_y_init if selected_item == 0 \
+			else bag_select_arrow.position.y - select_sprite_y_offset
 
 func set_active_bag_option():
 	var active_option = bag_options[selected_option % bag_opt_length]
@@ -93,6 +110,8 @@ func _testing() -> void:
 # each individual bag sprite. Can't get it to work though, the documentation surrounding the AnimationPlayer
 # is too vague to really piece together what you need to write animations through code. Maybe its something
 # to revisit later when we have time to really explore the engine code.
+# 
+# Maybe consider using Tweens? Might be useful.
 
 #func _create_bag_shake():
 	#var anim_lib = AnimationLibrary.new()

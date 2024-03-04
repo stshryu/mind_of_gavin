@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cw4rs7ubqkxye"]
+[gd_scene load_steps=24 format=3 uid="uid://cw4rs7ubqkxye"]
 
 [ext_resource type="Script" path="res://scenes/ui/bag_screen.gd" id="1_0sgc7"]
 [ext_resource type="Texture2D" uid="uid://crmt4mxdgfrbl" path="res://art/UI/bag_ui/bag_background.png" id="1_kcbrn"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://jbcohigyajn" path="res://art/UI/bag_ui/pokeball_sign.png" id="11_xttop"]
 [ext_resource type="Texture2D" uid="uid://btb40284mmp7u" path="res://art/UI/bag_ui/point.png" id="13_4w8ll"]
 [ext_resource type="PackedScene" uid="uid://bu7rykphhxkft" path="res://scenes/ui/bag_item_unit.tscn" id="14_nc7ea"]
+[ext_resource type="FontFile" uid="uid://dcvhc4jqr6ccq" path="res://art/fonts/pokefont.ttf" id="15_unlug"]
+[ext_resource type="Texture2D" uid="uid://b4fpfjhc7vn5g" path="res://art/UI/ui_arrow_left_right.png" id="16_ret40"]
 
 [sub_resource type="Animation" id="Animation_cqbgj"]
 resource_name = "balls"
@@ -177,7 +179,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
+[node name="Background" type="TextureRect" parent="Control"]
 layout_mode = 0
 offset_right = 240.0
 offset_bottom = 160.0
@@ -263,7 +265,7 @@ libraries = {
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
 layout_mode = 0
-offset_left = 112.0
+offset_left = 122.0
 offset_top = 16.0
 offset_right = 232.0
 offset_bottom = 144.0
@@ -274,3 +276,39 @@ theme_override_constants/margin_bottom = 1
 
 [node name="ContainerLayout" parent="Control/MarginContainer" instance=ExtResource("14_nc7ea")]
 layout_mode = 2
+
+[node name="ItemSprite" type="TextureRect" parent="Control"]
+custom_minimum_size = Vector2(30, 26)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 71.0
+offset_right = 32.0
+offset_bottom = 96.0
+
+[node name="ItemDesc" type="RichTextLabel" parent="Control"]
+clip_contents = false
+layout_mode = 0
+offset_left = 7.0
+offset_top = 106.0
+offset_right = 103.0
+offset_bottom = 151.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.764706, 0.764706, 0.764706, 0.384314)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/normal_font = ExtResource("15_unlug")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "The quick brown fox jumps over the lazy dog "
+scroll_active = false
+
+[node name="ItemSelect" type="TextureRect" parent="Control"]
+layout_mode = 2
+offset_left = 114.0
+offset_top = 18.0
+offset_right = 120.0
+offset_bottom = 28.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("16_ret40")
