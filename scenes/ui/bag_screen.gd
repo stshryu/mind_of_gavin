@@ -18,10 +18,14 @@ var selected_item: int
 var scene_manager: Node2D
 var bag_options: Array
 var bag_opt_length: int
+var bag_unit_selection_length: int
 var player_inventory: PlayerInventory
 var bag_unit_selection_hash = { "KeyItems": 0, "Items": 0, "Berries": 0, "Balls": 0, "TMHM": 0}
 var select_sprite_y_init: int = 18
 var select_sprite_y_offset: int = 15
+var current_items: Array
+var active_option: Object
+var rng: RandomNumberGenerator
 
 var is_active_screen = false
 
@@ -34,6 +38,7 @@ func _ready():
 	player_inventory = Utils.get_player_inventory()
 	bag_options = bag_option_root.get_children()
 	bag_opt_length = bag_options.size()
+	rng = RandomNumberGenerator.new()
 	selected_option = 0
 	selected_item = 0
 	
@@ -44,6 +49,7 @@ func _on_menu_active_bag_menu():
 	is_active_screen = true
 	scene_root.visible = true
 	set_active_bag_option()
+	_display_selected_unit(selected_item)
 
 func open_main_menu():
 	is_active_screen = false
@@ -59,20 +65,32 @@ func _unhandled_input(event):
 		selected_item = 0
 		selected_option = bag_opt_length - 1 if selected_option == 0 else selected_option - 1
 		set_active_bag_option()
+		bag_select_arrow.position.y = select_sprite_y_init
+		_display_selected_unit(selected_item)
 	elif event.is_action_pressed("ui_right"):
 		selected_item = 0
 		selected_option += 1
 		set_active_bag_option()
+		bag_select_arrow.position.y = select_sprite_y_init
+		_display_selected_unit(selected_item)
 	elif event.is_action_pressed("ui_down"):
-		selected_item += 1
-		bag_select_arrow.position.y += select_sprite_y_offset
+		if selected_item < bag_unit_selection_length - 1:
+			selected_item += 1
+			#animation_player.play(**{'name': active_option.name, 'custom_speed': 3.0})
+			animation_player.play(active_option.name, -1.0, rng.randf_range(1.5, 3.0))
+		bag_select_arrow.position.y = select_sprite_y_init + (selected_item % bag_unit_selection_length) \
+			* select_sprite_y_offset
+		_display_selected_unit(selected_item)
 	elif event.is_action_pressed("ui_up"):
-		selected_item = 0 if selected_item == 0 else selected_item - 1
-		bag_select_arrow.position.y = select_sprite_y_init if selected_item == 0 \
-			else bag_select_arrow.position.y - select_sprite_y_offset
+		if selected_item != 0:
+			selected_item -= 1
+			animation_player.play(active_option.name, -1.0, rng.randf_range(1.5, 3.0))
+		bag_select_arrow.position.y = select_sprite_y_init + (selected_item % bag_unit_selection_length) \
+			* select_sprite_y_offset
+		_display_selected_unit(selected_item)
 
 func set_active_bag_option():
-	var active_option = bag_options[selected_option % bag_opt_length]
+	active_option = bag_options[selected_option % bag_opt_length]
 	select_point.position.x = init_x + (selected_option % bag_opt_length) * offset_x
 	for option in bag_options:
 		option.visible = true if option.name == active_option.name else false
@@ -80,13 +98,18 @@ func set_active_bag_option():
 	_populate_active_option(active_option)
 	animation_player.play(active_option.name)
 	
+func _display_selected_unit(selected_item) -> void:
+	bag_selection_desc.text = current_items[selected_item].description
+	bag_selection_sprite.texture = current_items[selected_item].texture
+	
 func _depopulate_container() -> void:
 	for n in bag_selections_container.get_children():
 		bag_selections_container.remove_child(n)
 		n.queue_free()
 	
 func _populate_active_option(active_option: Object) -> void:
-	var current_items = player_inventory.inventory[active_option.name]
+	current_items = player_inventory.inventory[active_option.name]
+	bag_unit_selection_length = current_items.size()
 	for item in current_items:
 		var instance = bag_unit_scene.instantiate()
 		bag_selections_container.add_child(_populate_option_field(instance, item))
@@ -98,7 +121,6 @@ func _populate_option_field(_inst, _opt):
 	return _inst
 	
 func _testing() -> void:
-	var rng = RandomNumberGenerator.new()
 	var test = [ "KeyItems", "Items", "TMHM", "Berries", "Balls" ]
 	for key in test:
 		for i in range(1, rng.randi_range(2, 10)):
@@ -112,32 +134,3 @@ func _testing() -> void:
 # to revisit later when we have time to really explore the engine code.
 # 
 # Maybe consider using Tweens? Might be useful.
-
-#func _create_bag_shake():
-	#var anim_lib = AnimationLibrary.new()
-	#for option in bag_options:
-		#var animation = Animation.new()
-		#animation.step = 0.1
-		#animation.length = 0.2
-#
-		#var texture = option.find_children("Bag").back()
-		#var sprite_path: NodePath = scene_root.get_path_to(texture)
-		#
-		#var sprite_vis_path: NodePath = "%s:visible" % sprite_path
-		#var vis_track_index = animation.add_track(Animation.TYPE_VALUE)
-		#animation.track_set_path(vis_track_index, sprite_vis_path)
-		#animation.track_insert_key(vis_track_index, 0.0, true)
-		#
-		#var sprite_texture_path: NodePath = "%s:texture" % sprite_path
-		#var texture_track_index = animation.add_track(Animation.TYPE_VALUE)
-		#animation.track_set_path(texture_track_index, sprite_texture_path)
-		#animation.track_insert_key(texture_track_index, 0.0, texture)
-		#
-		#var sprite_rotation_path: NodePath = "%s:rotation" % sprite_path
-		#var rota_track_index = animation.add_track(Animation.TYPE_VALUE)
-		#animation.track_set_path(rota_track_index, sprite_rotation_path)
-		#animation.track_insert_key(rota_track_index, 0.0, 4)
-		#animation.track_insert_key(rota_track_index, 0.2, 0)
-		#
-		#anim_lib.add_animation(option.name, animation)
-	#animation_player.add_animation_library("bag_anim", anim_lib)
