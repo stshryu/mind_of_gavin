@@ -28,8 +28,8 @@ func transition_scene():
 	if player_entered: Utils.get_scene_manager() \
 		.transition_to_scene(next_scene_path, spawn_location, spawn_direction)
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	player_entered = true
 
-func _on_body_exited(body):
+func _on_body_exited(_body):
 	player_entered = false

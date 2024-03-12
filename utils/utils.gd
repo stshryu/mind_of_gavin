@@ -1,8 +1,7 @@
 extends Node
 
-var save_data: SaveData
 var player_inventory: PlayerInventory
-var player_direction: Vector2
+var player_direction: int
 var player_position: Vector2
 
 func _ready() -> void:
@@ -17,14 +16,9 @@ func get_player_inventory() -> PlayerInventory:
 func set_player_inventory(updated_inv: PlayerInventory) -> void:
 	player_inventory = updated_inv
 
-func save_game() -> void:
-	SaveGame.save(save_data)
-	
-func _save_game_state() -> void:
-	save_data.player_inventory = player_inventory
-	save_data.player_direction = player_direction
-	save_data.player_position = player_position
-	
+func save_game(savedata: SaveData) -> void:
+	SaveGame.save(savedata)
+
 func get_scene_manager() -> Object:
 	return get_node("/root/SceneManager")
 	

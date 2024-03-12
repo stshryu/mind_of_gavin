@@ -95,7 +95,14 @@ func _menu_options() -> void:
 		"Options":
 			print_debug("options")
 		"Save":
-			print_debug("save")
+			var savedata = SaveData.new()
+			var packedscene = PackedScene.new()
+			packedscene.pack(Utils.get_scene_manager().find_child("CurrentScene").duplicate())
+			savedata.current_scene = packedscene
+			savedata.player_inventory = Utils.get_player_inventory()
+			savedata.player_direction = player.facing_direction
+			savedata.player_position = player.position
+			Utils.save_game(savedata)
 		"Exit":
 			menu.visible = false
 			current_screen = CURRENTSCREEN.NOTHING

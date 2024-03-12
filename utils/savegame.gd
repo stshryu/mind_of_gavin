@@ -11,7 +11,8 @@ func _prepare_directory(path: String) -> void:
 	DirAccess.make_dir_absolute(path)
 
 func save(data: SaveData) -> void:
-	ResourceSaver.save(data, file_path)
+	var res = ResourceSaver.save(data, file_path)
+	print(res)
 	
 func load_save() -> SaveData:
 	var save_exists := FileAccess.file_exists(file_path)

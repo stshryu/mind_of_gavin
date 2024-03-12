@@ -49,7 +49,7 @@ func _on_menu_active_bag_menu():
 	is_active_screen = true
 	scene_root.visible = true
 	set_active_bag_option()
-	_display_selected_unit(selected_item)
+	_display_selected_unit()
 
 func open_main_menu():
 	is_active_screen = false
@@ -66,13 +66,13 @@ func _unhandled_input(event):
 		selected_option = bag_opt_length - 1 if selected_option == 0 else selected_option - 1
 		set_active_bag_option()
 		bag_select_arrow.position.y = select_sprite_y_init
-		_display_selected_unit(selected_item)
+		_display_selected_unit()
 	elif event.is_action_pressed("ui_right"):
 		selected_item = 0
 		selected_option += 1
 		set_active_bag_option()
 		bag_select_arrow.position.y = select_sprite_y_init
-		_display_selected_unit(selected_item)
+		_display_selected_unit()
 	elif event.is_action_pressed("ui_down"):
 		if selected_item < bag_unit_selection_length - 1:
 			selected_item += 1
@@ -80,14 +80,14 @@ func _unhandled_input(event):
 			animation_player.play(active_option.name, -1.0, rng.randf_range(1.5, 3.0))
 		bag_select_arrow.position.y = select_sprite_y_init + (selected_item % bag_unit_selection_length) \
 			* select_sprite_y_offset
-		_display_selected_unit(selected_item)
+		_display_selected_unit()
 	elif event.is_action_pressed("ui_up"):
 		if selected_item != 0:
 			selected_item -= 1
 			animation_player.play(active_option.name, -1.0, rng.randf_range(1.5, 3.0))
 		bag_select_arrow.position.y = select_sprite_y_init + (selected_item % bag_unit_selection_length) \
 			* select_sprite_y_offset
-		_display_selected_unit(selected_item)
+		_display_selected_unit()
 
 func set_active_bag_option():
 	active_option = bag_options[selected_option % bag_opt_length]
@@ -98,7 +98,7 @@ func set_active_bag_option():
 	_populate_active_option(active_option)
 	animation_player.play(active_option.name)
 	
-func _display_selected_unit(selected_item) -> void:
+func _display_selected_unit() -> void:
 	bag_selection_desc.text = current_items[selected_item].description
 	bag_selection_sprite.texture = current_items[selected_item].texture
 	
