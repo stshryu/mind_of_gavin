@@ -1,8 +1,6 @@
 extends Node
 
 var player_inventory: PlayerInventory
-var player_direction: Vector2
-var player_position: Vector2
 var loaded: bool = false
 
 func _ready() -> void:
@@ -26,7 +24,6 @@ func save_game(savedata: SaveData) -> void:
 	
 func get_save() -> SaveData:
 	return SaveGame.load_save()
-	
 
 func get_scene_manager() -> Object:
 	return get_node("/root/SceneManager")
