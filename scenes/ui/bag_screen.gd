@@ -43,7 +43,7 @@ func _ready():
 	selected_item = 0
 	
 	# For testing
-	_testing()
+	#_testing()
 
 func _on_menu_active_bag_menu():
 	is_active_screen = true

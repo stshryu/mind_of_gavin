@@ -97,10 +97,21 @@ func _menu_options() -> void:
 		"Save":
 			var savedata = SaveData.new()
 			var packedscene = PackedScene.new()
-			packedscene.pack(Utils.get_scene_manager().find_child("CurrentScene").duplicate())
+			var currentscene = Utils.get_scene_manager().find_child("CurrentScene").get_child(0)
+			packedscene.pack(currentscene.duplicate())
 			savedata.current_scene = packedscene
 			savedata.player_inventory = Utils.get_player_inventory()
-			savedata.player_direction = player.facing_direction
+			var player_direction = Vector2.ZERO
+			match player.facing_direction:
+				0:
+					player_direction = Vector2(-1, 0)
+				1:
+					player_direction = Vector2(1, 0)
+				2: 
+					player_direction = Vector2(0, -1)
+				3:
+					player_direction = Vector2(0, 1)
+			savedata.player_direction = player_direction
 			savedata.player_position = player.position
 			Utils.save_game(savedata)
 		"Exit":
