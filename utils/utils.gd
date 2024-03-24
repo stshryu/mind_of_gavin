@@ -19,8 +19,8 @@ func get_player_inventory() -> PlayerInventory:
 func set_player_inventory(updated_inv: PlayerInventory) -> void:
 	player_inventory = updated_inv
 
-func save_game(savedata: SaveData) -> void:
-	SaveGame.save(savedata)
+func save_game(savedata: SaveData, current_scene: PackedScene) -> void:
+	SaveGame.save(savedata, current_scene)
 	
 func get_save() -> SaveData:
 	return SaveGame.load_save()
